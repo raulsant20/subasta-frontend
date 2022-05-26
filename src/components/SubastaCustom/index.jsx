@@ -24,12 +24,12 @@ const SubastaCustom = ({id, data, setData}) => {
 							 Tiempo restante:
 							</Box>
 							<Box>
-								 <Tiempo tiempo={14} win={win} id={id} inicial={data.inicial}/>
+								 <Tiempo tiempo={100000} win={true} id={id} inicial={data?.inicial}/>
 							</Box>
       </Typography>
 			</Box>
 			<Grid container>
-				<SubItem nombre={data.nombre} descripcion={data.descripcion} url={data.foto}/>
+				<SubItem nombre={data?.nombre} descripcion={data?.descripcion} url={data?.foto}/>
 				<DataSub id={id} data={data} setData={setData} win={win} setWin={setWin}/>
 			</Grid >
 		</Box>

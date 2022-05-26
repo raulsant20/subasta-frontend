@@ -27,8 +27,11 @@ const LoginSeller = () => {
     const data = Object.fromEntries(new FormData(e.target))
     try {
       const user = await login(data);
+      if(user.error==='data incorrect'){
+        alert('Datos incorrectos')
+      }else{
       ChangeTokenState(user.token, user.name, user.type, user.id);
-      navigate('/');
+      navigate('/');}
     } catch {
       console.log('no logeo');
     }

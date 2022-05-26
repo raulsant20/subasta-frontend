@@ -6,12 +6,15 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const CustomCard = ({item}) => {
+	const navigate = useNavigate()
+	console.log(item)
 	return (
 		<Grid item xs={12} sm={6} md={4} >
 			<Card sx={{ maxWidth: 200, m: 'auto', mb: 4, borderRadius: '20px'}}>
-				<CardActionArea>
+				<CardActionArea onClick={()=>navigate(`/subasta/${item._id}`)}>
 					<CardMedia
 						component="img"
 						height="140"

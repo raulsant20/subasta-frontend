@@ -9,40 +9,54 @@ import { useEffect, useState } from 'react';
 
 const DataSub = ({id, data, setData, setWin}) => {
 	const [socket, setSocket] = useState()
+	const [precio, setPrecio] = useState(data?.inicial)
+	const [unido, setUnido] = useState(false)
 	const [name, setName] = useState('Nadie')
 
 	useEffect(()=>{
 		if(localStorage.getItem('type')==='user'){
 			setSocket(io(CONFIG.url))
-			socket.emit('newSubasta', id)
 		}
 		return socket?.disconnect(true);
 	},[])
 
+	const unir = ()=>{
+		console.log('mandando socket')
+		socket?.emit('newSubasta', id)
+		setUnido(true)
+	}
+
 	useEffect(() => {
     socket?.on('add', (name) => {
+			console.log('aumentando de otro')
+			console.log(data)
+			console.log(setData)
 			setName(name)
-			setData({...data, inicial: data.inicial + 5})
+			setPrecio((precio)=>(parseInt(precio) + 5).toString())
 			setWin(false)
     });
   }, [socket]);
 
 	const aumentar = () => {
-		setData({...data, inicial: data.inicial + 5})
+		const newPrecio = (parseInt(precio) + 5).toString()
+		setName(localStorage.getItem('name'))
+		setPrecio(newPrecio)
+		setData({...data, inicial: newPrecio})
 		setWin(true)
-		socket.emit('addSubasta',{idsubasta: id, name: localStorage.getItem('name')})
+		socket?.emit('addSubasta',{idsubasta: id, name: localStorage.getItem('name')})
 	}
 
 	return (
 		<Grid item xs={6} sx={{display: 'flex',flexDirection:'column', justifyContent: 'space-between'}}>
+			{!unido && <Button variant="contained" onClick={unir}>Unirse a la subasta</Button>}
 			<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
 				Precio actual
       </Typography>
 			<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
-				S/. 50.00 {data.inicial}
+				S/ {precio}
       </Typography>
 			<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
-				Poseedor actual: Fernando {name}
+				Poseedor actual: {name}
       </Typography>
 			<Box>
 				<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
