@@ -11,6 +11,7 @@ import HomeSeller from '../pages/HomeSeller';
 import Create from '../pages/Create';
 import Subasta from '../pages/Subasta'
 import { UserContext } from '../context/userContext';
+import SubGanados from '../pages/SubGanados';
 
 function AppRoutes() {
   const { user } = useContext(UserContext);
@@ -27,6 +28,7 @@ function AppRoutes() {
         <Route path='/seller-login' element={<LoginSeller/>} />
         <Route path='/seller-register' element={ <RegisterSeller/> } />
         <Route path='/subasta/:id' element={<Subasta />}/>
+        <Route path='/ganados' element={<SubGanados/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

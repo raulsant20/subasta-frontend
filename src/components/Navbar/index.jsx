@@ -123,19 +123,27 @@ export default function Navbar() {
             :
             <Box sx={{justifyContent: 'flex-end', flexGrow: 1, display: 'flex' }}>
                 <Button
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{ my: 2, color: 'black', display: 'block' }}
                   onClick={logout}
                 >
                   Desconectar
                 </Button>
                 {
-                  localStorage.getItem('type')==='seller' && 
+                  localStorage.getItem('type')==='seller' ?
                   <Button
-                    sx={{ my: 2, color: 'white', display: 'block', bgcolor: '#d9d9d9' }}
+                    sx={{ my: 2, color: 'black', display: 'block', bgcolor: '#d9d9d9' }}
                     component={Link}
                     to='/create'
                   >
                   Agregar productor
+                </Button>
+                :
+                <Button
+                    sx={{ my: 2, color: 'black', display: 'block', bgcolor: '#d9d9d9' }}
+                    component={Link}
+                    to='/ganados'
+                  >
+                 Mis subastas ganadas
                 </Button>
                 }
             </Box>
