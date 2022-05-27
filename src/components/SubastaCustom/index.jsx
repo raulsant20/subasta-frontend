@@ -24,7 +24,7 @@ const SubastaCustom = ({id, data, setData}) => {
 							 Tiempo restante:
 							</Box>
 							<Box>
-								 <Tiempo tiempo={100000} win={true} id={id} inicial={data?.inicial}/>
+								 <Tiempo win={win} id={id} data={data}/>
 							</Box>
       </Typography>
 			</Box>

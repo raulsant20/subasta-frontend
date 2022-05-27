@@ -1,16 +1,13 @@
+/* eslint-disable react/prop-types */
 import Grid from '@mui/material/Grid'
 import CardFin from '../CardFin'
 
-const Fin = () => {
+const Fin = ({data}) => {
 	return (
 		<Grid container sx={{bgcolor: '#b2afaf', p: 6}}>
-			<CardFin/>
-			<CardFin/>
-			<CardFin/>
-			<CardFin/>
-			<CardFin/>
-			<CardFin/>
-			<CardFin/>
+			{
+				data.map((item, i)=><CardFin key={i} data={item}/>)
+			}
 		</Grid>
 	);
 };

@@ -10,7 +10,10 @@ const ContainerCard = () => {
 	const get = () => {
 		fetch(`${CONFIG.url}/api/subasta/getall`)
 		.then(res=> res.json())
-		.then(res=>setSubastas(res))
+		.then(res=>{
+			const sub = res.filter((item)=>new Date()-new Date(item?.fecha)<3600000)
+			setSubastas(sub)
+		})
 	}
 
 	useEffect(()=>{

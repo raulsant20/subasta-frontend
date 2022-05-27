@@ -17,7 +17,7 @@ const DataSub = ({id, data, setData, setWin}) => {
 		if(localStorage.getItem('type')==='user'){
 			setSocket(io(CONFIG.url))
 		}
-		return socket?.disconnect(true);
+		return ()=>socket?.disconnect(true);
 	},[])
 
 	const unir = ()=>{
@@ -35,6 +35,7 @@ const DataSub = ({id, data, setData, setWin}) => {
 			setPrecio((precio)=>(parseInt(precio) + 5).toString())
 			setWin(false)
     });
+		return ()=>socket?.disconnect(true);
   }, [socket]);
 
 	const aumentar = () => {
@@ -48,7 +49,7 @@ const DataSub = ({id, data, setData, setWin}) => {
 
 	return (
 		<Grid item xs={6} sx={{display: 'flex',flexDirection:'column', justifyContent: 'space-between'}}>
-			{!unido && <Button variant="contained" onClick={unir}>Unirse a la subasta</Button>}
+			{!unido && new Date(data?.fecha) < new Date() && <Button variant="contained" onClick={unir}>Unirse a la subasta</Button>}
 			<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
 				Precio actual
       </Typography>
@@ -58,7 +59,8 @@ const DataSub = ({id, data, setData, setWin}) => {
 			<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
 				Poseedor actual: {name}
       </Typography>
-			<Box>
+			{
+				unido && new Date(data?.fecha) < new Date() ? <Box>
 				<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '28px', fontWeight: '600', textAlign: 'left', display: 'flex', alignItems: 'center', m:4}}>
 					Aumentar
 				</Typography>
@@ -66,6 +68,11 @@ const DataSub = ({id, data, setData, setWin}) => {
 					+ S/. 5.00
 				</Button>
 			</Box>
+			:
+			<Button variant="contained" onClick={aumentar} sx={{ width: '80%', height: '80px',my: 2, display: 'block', fontSize: '40px' }}>
+					ÚNETE PARA PUJAR
+				</Button>
+			}
 		</Grid>
 	);
 };

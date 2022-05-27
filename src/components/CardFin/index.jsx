@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -5,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid'
 import {  CardActionArea } from '@mui/material';
 
-const CardFin = () => {
+const CardFin = ({data}) => {
 	return (
 		<Grid item xs={6} >
 		<Card sx={{ maxWidth: 350, m: 'auto',mb: 4, borderRadius: '20px', bgcolor: '#c4c4c4' }}>
@@ -18,10 +19,10 @@ const CardFin = () => {
 					/>
 					<CardContent sx={{bgcolor: '#c4c4c4'}}>
 						<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '15px', fontWeight: '600'}}>
-							Nombre del producto
+							{data.nombre}
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{textAlign: 'left', fontSize: '15px'}}>
-							Precio final: S/ 100.00
+							Precio final: S/ {data.inicial}
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{textAlign: 'left'}}>
 							Ascendente

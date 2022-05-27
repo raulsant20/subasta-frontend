@@ -38,7 +38,7 @@ const Create = () => {
     try {
       const user = await sending({...data, foto: img});
       console.log(user)
-      navigate('/login');
+      navigate('/');
     } catch {
       console.log('no logeo');
     }

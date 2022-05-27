@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,7 +7,7 @@ import Grid from '@mui/material/Grid'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-const CardPend = () => {
+const CardPend = ({data}) => {
 	return (
 		<Grid item xs={12} sm={6} md={4} >
 			<Card sx={{ maxWidth: 200, m: 'auto', mb: 4, borderRadius: '20px'}}>
@@ -14,21 +15,21 @@ const CardPend = () => {
 					<CardMedia
 						component="img"
 						height="140"
-						image="https://picsum.photos/200"
+						image={data.foto}
 						alt="green iguana"
 					/>
 					<CardContent sx={{bgcolor: '#c4c4c4'}}>
 						<Typography gutterBottom variant="h1" component="div" sx={{fontSize: '15px', fontWeight: '600'}}>
-							Iphone 13 pro max 128gb
+							{data.nombre}
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{textAlign: 'left'}}>
 							Ascendente
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{textAlign: 'left'}}>
-							Precio inicial: S/ 2000
+							Precio inicial: S/ {data.inicial}
 						</Typography>
 						<Typography variant="body2" color="text.secondary" sx={{textAlign: 'left'}}>
-							30-07-2022
+							{data.fecha.replace('T',' ')}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
